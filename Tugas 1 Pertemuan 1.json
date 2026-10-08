@@ -1,0 +1,100 @@
+{
+  "name": "Tugas 1 Pertemuan 1",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Data Mahasiswa",
+        "formDescription": "Silakan isi data diri Anda.",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Nama",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Email",
+              "fieldType": "email",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Kelas",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "TI-01"
+                  },
+                  {
+                    "option": "TI-02"
+                  }
+                ]
+              },
+              "requiredField": true
+            }
+          ]
+        },
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.6,
+      "position": [
+        0,
+        0
+      ],
+      "id": "d07e97b9-00b2-4de3-849c-baddb0dfe38e",
+      "name": "On form submission",
+      "webhookId": "526008ff-b4b2-4632-be38-f0d040119201"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.Email }}",
+        "subject": "=Konfirmasi Pendaftaran {{ $json.Kelas }}",
+        "message": "=<div style=\"font-family: Arial, sans-serif; color: #333; line-height: 1.6;\">\n    <h2 style=\"color: #0056b3;\">Konfirmasi Pendaftaran</h2>\n    <p>Halo <strong>{{ $json.Nama }}</strong>,</p>\n    <p>Terima kasih telah mengisi formulir data mahasiswa. Berikut adalah rincian informasi yang telah kami terima ke dalam sistem:</p>\n    <table style=\"border-collapse: collapse; width: 100%; max-width: 400px; margin-top: 10px;\">\n        <tr>\n            <td style=\"padding: 8px; border: 1px solid #ddd; background-color: #f9f9f9;\"><strong>Nama Lengkap</strong></td>\n            <td style=\"padding: 8px; border: 1px solid #ddd;\">{{ $json.Nama }}</td>\n        </tr>\n        <tr>\n            <td style=\"padding: 8px; border: 1px solid #ddd; background-color: #f9f9f9;\"><strong>Email</strong></td>\n            <td style=\"padding: 8px; border: 1px solid #ddd;\">{{ $json.Email }}</td>\n        </tr>\n        <tr>\n            <td style=\"padding: 8px; border: 1px solid #ddd; background-color: #f9f9f9;\"><strong>Kelas</strong></td>\n            <td style=\"padding: 8px; border: 1px solid #ddd;\">{{ $json.Kelas }}</td>\n        </tr>\n    </table>\n    <p style=\"margin-top: 20px;\">Salam hangat,<br><strong>Sistem Otomatisasi n8n</strong></p>\n</div>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        224,
+        0
+      ],
+      "id": "9b4bffef-4f35-48e5-9526-8d446711547f",
+      "name": "Send a message",
+      "webhookId": "fb218ed4-3deb-4eaa-81d5-bac4cd1df448",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "RiUVJbxPnKK5wQvG",
+          "name": "Gmail account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "ab491ee6-dab8-488d-826a-a500de6dd7d6",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "dc96f10ae7dc95d3c138575ba243a0a167923dbcb524841d451aadf9135d5fb3"
+  },
+  "nodeGroups": [],
+  "id": "jovSkuG5aOsZrRUF",
+  "tags": []
+}
